@@ -13,8 +13,9 @@ def new_base_image(w, h, margin):
   return image
 
 def draw_grid(img, num_rows, num_cols):
-  witdh = img.width
+  width = img.width
   height = img.height
+  cell_w = width / num_rows
     
     for x in range(0, width, cell_size):
         draw.line([(x, 0), (x, height)], fill='black')
