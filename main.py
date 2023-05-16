@@ -12,7 +12,14 @@ class ImageNFT:
     self.cell_h = 0
     draw = ImageDraw.Draw(self.image)
     draw.rectangle((margin, margin, w - margin, h - margin), fill=bgcolor)
-  
+
+  def add_text(text, xp, yp, color):
+    font = ImageFont.truetype("arial.ttf", 16)  # Change the font and size as desired
+    text = "Hello, World!"
+    text_width, text_height = draw.textsize(text, font=font)
+    text_x = (width - text_width) // 2
+    text_y = (height - text_height) // 2
+    draw.text((text_x, text_y), text, fill='black', font=font)
   
   def draw_grid(self, lcolor="white"):
     draw = ImageDraw.Draw(self.image)
@@ -29,6 +36,7 @@ class ImageNFT:
       x = num % self.num_cols
       y = int(num / self.num_rows)
       self.paint_cell(x, y, scolor)
+      #print(x, y)
 
   def paint_cell(self, x, y, ccolor):
     draw = ImageDraw.Draw(self.image)
@@ -45,15 +53,16 @@ class ImageNFT:
     self.cell_h = int((height -2*self.margin) / num_cols)
 
 
-sizeh = 300
-sizew = 300
-margin = 10
-cells = 10
+sizeh = 1000
+sizew = 1000
+margin = 5
+cells = 50
 
 image = ImageNFT(sizew, sizeh, margin, "#fdcae1")
 image.set_grid(cells, cells)
 
 prime_numbers = series.get_primes_lower_than_x(cells * cells)
+#print(prime_numbers)
 image.paint_serie(prime_numbers, "#84b6f4")
 
 image.draw_grid("#fdfd96")
