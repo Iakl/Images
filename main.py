@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 import series
 
 class ImageNFT:
@@ -13,13 +13,12 @@ class ImageNFT:
     draw = ImageDraw.Draw(self.image)
     draw.rectangle((margin, margin, w - margin, h - margin), fill=bgcolor)
 
-  def add_text(text, xp, yp, color):
-    font = ImageFont.truetype("arial.ttf", 16)  # Change the font and size as desired
-    text = "Hello, World!"
-    text_width, text_height = draw.textsize(text, font=font)
-    text_x = (width - text_width) // 2
-    text_y = (height - text_height) // 2
-    draw.text((text_x, text_y), text, fill='black', font=font)
+  def add_text(self, text, xp, yp, color='black'):
+    draw = ImageDraw.Draw(self.image)
+    font_path = "iakl.ttf"
+    font_size = 16
+    font = ImageFont.truetype(font_path, font_size)
+    draw.text((xp, yp), text, fill=color, font=font)
   
   def draw_grid(self, lcolor="white"):
     draw = ImageDraw.Draw(self.image)
@@ -52,8 +51,8 @@ class ImageNFT:
     self.cell_h = (height -2*self.margin) / num_cols
 
 
-sizeh = 1000
-sizew = 1000
+sizeh = 1020
+sizew = 1020
 margin = 10
 cells = 100
 
@@ -67,8 +66,9 @@ image.set_grid(cells, cells)
 
 prime_numbers = series.get_primes_lower_than_x(cells * cells)
 image.paint_serie(prime_numbers, y)
+image.add_text("hola", 2, 2, "#ffca99")
 
-image.draw_grid(rs)
+#image.draw_grid(rs)
 
 image.savejpg('primes')
 
