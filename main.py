@@ -13,10 +13,10 @@ class ImageNFT:
     draw = ImageDraw.Draw(self.image)
     draw.rectangle((margin, margin, w - margin, h - margin), fill=bgcolor)
 
-  def add_text(self, text, xp, yp, color='black'):
+  def add_text(self, text, xp, yp, color='black', fsize=16):
     draw = ImageDraw.Draw(self.image)
     font_path = "iakl.ttf"
-    font_size = 16
+    font_size = fsize
     font = ImageFont.truetype(font_path, font_size)
     draw.text((xp, yp), text, fill=color, font=font)
   
@@ -51,14 +51,15 @@ class ImageNFT:
     self.cell_h = (height -2*self.margin) / num_cols
 
 
-sizeh = 1020
-sizew = 1020
-margin = 10
+sizeh = 4096
+sizew = 4096
 cells = 100
+margin = sizew / (cells + 2)
 
 rs = "#fdcae1"
 b = "#84b6f4"
 y = "#fdfd96"
+tc = "#ff5830"
 
 
 image = ImageNFT(sizew, sizeh, margin, b, rs)
@@ -66,7 +67,7 @@ image.set_grid(cells, cells)
 
 prime_numbers = series.get_primes_lower_than_x(cells * cells)
 image.paint_serie(prime_numbers, y)
-image.add_text("hola", 2, 2, "#ffca99")
+image.add_text(f"primes series {cells * cells}", sizew - 100, sizeh - 2/3*margin, tc, int(margin / 2))
 
 #image.draw_grid(rs)
 
