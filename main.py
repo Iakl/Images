@@ -25,18 +25,17 @@ class ImageNFT:
     draw = ImageDraw.Draw(self.image)
     width, height =self.image.size
 
-    for x in range(self.margin, width - self.margin + 1, self.cell_w):
-        draw.line([(x, self.margin), (x, height - self.margin)], fill=lcolor)
+    for c in range(self.num_cols + 1):
+        draw.line([(self.margin + c * self.cell_w, self.margin), (self.margin + c * self.cell_w, height - self.margin)], fill=lcolor)
 
-    for y in range(self.margin, height - self.margin + 1, self.cell_h):
-        draw.line([(self.margin, y), (width - self.margin, y)], fill=lcolor)
+    for r in range(self.num_rows + 1):
+        draw.line([(self.margin, self.margin + r * self.cell_h, ), (width - self.margin, self.margin + r * self.cell_h)], fill=lcolor)
 
   def paint_serie(self, serie, scolor):
     for num in serie:
       x = num % self.num_cols
       y = int(num / self.num_rows)
       self.paint_cell(x, y, scolor)
-      #print(x, y)
 
   def paint_cell(self, x, y, ccolor):
     draw = ImageDraw.Draw(self.image)
@@ -49,8 +48,8 @@ class ImageNFT:
     width, height = self.image.size
     self.num_rows = num_rows
     self.num_cols = num_cols
-    self.cell_w = int((width -2*self.margin) / num_rows)
-    self.cell_h = int((height -2*self.margin) / num_cols)
+    self.cell_w = (width -2*self.margin) / num_rows
+    self.cell_h = (height -2*self.margin) / num_cols
 
 
 sizeh = 1000
@@ -62,12 +61,11 @@ image = ImageNFT(sizew, sizeh, margin, "#fdcae1")
 image.set_grid(cells, cells)
 
 prime_numbers = series.get_primes_lower_than_x(cells * cells)
-#print(prime_numbers)
 image.paint_serie(prime_numbers, "#84b6f4")
 
 image.draw_grid("#fdfd96")
 
-image.savejpg('primes.png')
+image.savejpg('primes')
 
 # Prime series:
 # 
