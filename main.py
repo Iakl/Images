@@ -1,5 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
-import series
+import series 
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 class ImageNFT:
   def __init__(self, w, h, margin, bgcolor="blue", bdcolor="blue"):
@@ -53,7 +55,7 @@ class ImageNFT:
 
 sizeh = 4096
 sizew = 4096
-cells = 100
+cells = 40
 margin = sizew / (cells + 2)
 
 rs = "#fdcae1"
@@ -62,16 +64,24 @@ y = "#fdfd96"
 tc = "#ff5830"
 
 
-image = ImageNFT(sizew, sizeh, margin, b, rs)
+image = ImageNFT(sizew, sizeh, margin, 'black', 'white')
 image.set_grid(cells, cells)
 
 prime_numbers = series.get_primes_lower_than_x(cells * cells)
-image.paint_serie(prime_numbers, y)
-image.add_text(f"primes series {cells * cells}", sizew - 100, sizeh - 2/3*margin, tc, int(margin / 2))
+image.paint_serie(prime_numbers, 'white')
+image.add_text(f"primes series {cells * cells}", sizew - margin*7.5, sizeh - margin, tc, int(margin * 2/3))
 
-#image.draw_grid(rs)
+image.draw_grid('white')
 
 image.savejpg('primes')
+
+# Display the image
+plt.imshow(image.image)
+plt.axis('off')  # Optional: Turn off axis labels and ticks
+
+# Show the plot
+plt.show()
+
 
 # Prime series:
 # 
