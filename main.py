@@ -2,10 +2,10 @@ from PIL import Image, ImageDraw
 import series
 
 class ImageNFT:
-  def __init__(self, w, h, margin, bgcolor="blue"):
+  def __init__(self, w, h, margin, bgcolor="blue", bdcolor="blue"):
       # Create a new image with RGB mode 
     self.margin = margin
-    self.image = Image.new("RGB", (w, h), "#fdfd96")
+    self.image = Image.new("RGB", (w, h), bdcolor)
     self.num_rows = 0
     self.num_cols = 0
     self.cell_w = 0
@@ -54,16 +54,21 @@ class ImageNFT:
 
 sizeh = 1000
 sizew = 1000
-margin = 5
-cells = 50
+margin = 10
+cells = 100
 
-image = ImageNFT(sizew, sizeh, margin, "#fdcae1")
+rs = "#fdcae1"
+b = "#84b6f4"
+y = "#fdfd96"
+
+
+image = ImageNFT(sizew, sizeh, margin, b, rs)
 image.set_grid(cells, cells)
 
 prime_numbers = series.get_primes_lower_than_x(cells * cells)
-image.paint_serie(prime_numbers, "#84b6f4")
+image.paint_serie(prime_numbers, y)
 
-image.draw_grid("#fdfd96")
+image.draw_grid(rs)
 
 image.savejpg('primes')
 
