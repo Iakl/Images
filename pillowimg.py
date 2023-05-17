@@ -65,35 +65,3 @@ class ImageNFT:
 
     # Show the plot
     plt.show()
-
-
-sizeh = 4096
-sizew = 4096
-cells = 100
-margin = 50
-#margin = sizew / (cells + 2)
-
-rs = "#fdcae1"
-b = "#84b6f4"
-y = "#fdfd96"
-tc = "#ff5830"
-
-
-image = ImageNFT(sizew, sizeh, margin, 'black', 'white')
-image.set_grid(cells, cells)
-
-prime_numbers = series.get_primes_lower_than_x(cells * cells)
-image.paint_serie(prime_numbers, 'white')
-image.add_text("primes series", margin, margin*1/4, tc, int(margin * 2/3))
-
-image.add_text(f"[b/w {cells * cells}]", margin, sizeh - margin, tc, int(margin * 2/3))
-
-image.add_text("[ak]", sizew - margin *2.3, sizeh - margin, tc, int(margin * 2/3))
-
-
-image.show()
-
-
-
-# Prime series:
-# 
