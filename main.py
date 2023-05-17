@@ -21,12 +21,6 @@ class ImageNFT:
     mask = img_n.split()[3]  # Canal alfa
     self.image.paste(img_n, pos, mask=mask)
 
-
-
-
-
-    
-
   def add_text(self, text, xp, yp, color='black', fsize=16):
     draw = ImageDraw.Draw(self.image)
     font_path = "iakl.ttf"
@@ -96,10 +90,6 @@ image.add_text(f"[b/w {cells * cells}]", margin, sizeh - margin, tc, int(margin 
 
 image.add_text("[ak]", sizew - margin *2.3, sizeh - margin, tc, int(margin * 2/3))
 
-image.add_image("right.png", (sizew - margin*2, 0))
-image.draw_grid('white')
-
-image.savejpg('primes')
 
 #image.show()
 
