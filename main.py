@@ -15,6 +15,18 @@ class ImageNFT:
     draw = ImageDraw.Draw(self.image)
     draw.rectangle((margin, margin, w - margin, h - margin), fill=bgcolor)
 
+  def add_image(self, path, pos):
+    img_n = Image.open(path).convert("RGBA")
+    img_n = img_n.resize((64, 64))
+    mask = img_n.split()[3]  # Canal alfa
+    self.image.paste(img_n, pos, mask=mask)
+
+
+
+
+
+    
+
   def add_text(self, text, xp, yp, color='black', fsize=16):
     draw = ImageDraw.Draw(self.image)
     font_path = "iakl.ttf"
@@ -27,10 +39,10 @@ class ImageNFT:
     width, height =self.image.size
 
     for c in range(self.num_cols + 1):
-        draw.line([(self.margin + c * self.cell_w, self.margin), (self.margin + c * self.cell_w, height - self.margin)], fill=lcolor)
+        draw.line([(self.margin + c * self.cell_w, self.margin), (self.margin + c * self.cell_w, height - self.margin)], fill=lcolor, width=3)
 
     for r in range(self.num_rows + 1):
-        draw.line([(self.margin, self.margin + r * self.cell_h, ), (width - self.margin, self.margin + r * self.cell_h)], fill=lcolor)
+        draw.line([(self.margin, self.margin + r * self.cell_h, ), (width - self.margin, self.margin + r * self.cell_h)], fill=lcolor, width=3)
 
   def paint_serie(self, serie, scolor):
     for num in serie:
@@ -52,11 +64,20 @@ class ImageNFT:
     self.cell_w = (width -2*self.margin) / num_rows
     self.cell_h = (height -2*self.margin) / num_cols
 
+  def show(self):
+    # Display the image
+    plt.imshow(image.image)
+    plt.axis('off')  # Optional: Turn off axis labels and ticks
+
+    # Show the plot
+    plt.show()
+
 
 sizeh = 4096
 sizew = 4096
-cells = 40
-margin = sizew / (cells + 2)
+cells = 100
+margin = 50
+#margin = sizew / (cells + 2)
 
 rs = "#fdcae1"
 b = "#84b6f4"
@@ -69,18 +90,19 @@ image.set_grid(cells, cells)
 
 prime_numbers = series.get_primes_lower_than_x(cells * cells)
 image.paint_serie(prime_numbers, 'white')
-image.add_text(f"primes series {cells * cells}", sizew - margin*7.5, sizeh - margin, tc, int(margin * 2/3))
+image.add_text("primes series", margin, margin*1/4, tc, int(margin * 2/3))
 
+image.add_text(f"[b/w {cells * cells}]", margin, sizeh - margin, tc, int(margin * 2/3))
+
+image.add_text("[ak]", sizew - margin *2.3, sizeh - margin, tc, int(margin * 2/3))
+
+image.add_image("right.png", (sizew - margin*2, 0))
 image.draw_grid('white')
 
 image.savejpg('primes')
 
-# Display the image
-plt.imshow(image.image)
-plt.axis('off')  # Optional: Turn off axis labels and ticks
+#image.show()
 
-# Show the plot
-plt.show()
 
 
 # Prime series:
