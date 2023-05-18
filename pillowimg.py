@@ -46,7 +46,7 @@ class ImageNFT:
 
   def paint_cell(self, x, y, ccolor):
     draw = ImageDraw.Draw(self.image)
-    draw.rectangle((margin + x*self.cell_w, margin + y*self.cell_h, margin + (x+1)*self.cell_w, margin + (y+1)*self.cell_h), fill=ccolor)
+    draw.rectangle((self.margin + x*self.cell_w, self.margin + y*self.cell_h, self.margin + (x+1)*self.cell_w, self.margin + (y+1)*self.cell_h), fill=ccolor)
 
   def savejpg(self, name):
     self.image.save(f"{name}.jpg", "JPEG")

@@ -1,5 +1,6 @@
+import os
 import turtle
-import series
+from PIL import Image
 
 class ImageNFT:
     def __init__(self, w, h, margin, bgcolor="blue", bdcolor="blue"):
@@ -25,6 +26,7 @@ class ImageNFT:
         self.pen.goto(-w // 2 + margin, -h // 2 + margin)
         self.pen.goto(-w // 2 + margin, h // 2 - margin)
         self.pen.penup()
+        turtle.done()
 
     def add_image(self, path, pos):
         img_n = turtle.Turtle()
@@ -79,4 +81,48 @@ class ImageNFT:
         self.pen.end_fill()
 
     def savejpg(self, name):
-        self.window.getcanvas().postscript(file=f
+        # Get the screen size
+        width, height = self.window.window_width(), self.window.window_height()
+
+        # Create a new turtle to capture the screen
+        capture_turtle = turtle.Turtle()
+        capture_turtle.speed(0)
+        capture_turtle.hideturtle()
+        capture_turtle.penup()
+
+        # Capture the screen and save it as a JPEG file
+        capture_turtle.getscreen().getcanvas().postscript(file=f"{name}.eps")
+        img = Image.open(f"{name}.eps")
+        img.save(f"{name}.jpg", "JPEG")
+
+        # Close the capture turtle and remove the temporary EPS file
+        capture_turtle.clear()
+        capture_turtle = None
+        os.remove(f"{name}.eps")
+
+    def set_grid(self, num_rows, num_cols):
+        width, height = self.window.window_width(), self.window.window_height()
+        self.num_rows = num_rows
+        self.num_cols = num_cols
+        self.cell_w = (width -2*self.margin) / num_rows
+        self.cell_h = (height -2*self.margin) / num_cols
+
+h = 4096
+w = 4096
+cells = 100
+margin = 50
+
+# wn = turtle.Screen()
+pen = turtle.Turtle()
+pen.speed(1)
+pen.penup()
+pen.color("black")
+pen.pensize(3)
+pen.goto(-w // 2 + margin, h // 2 - margin)
+pen.pendown()
+pen.goto(w // 2 - margin, h // 2 - margin)
+pen.goto(w // 2 - margin, -h // 2 + margin)
+pen.goto(-w // 2 + margin, -h // 2 + margin)
+pen.goto(-w // 2 + margin, h // 2 - margin)
+pen.penup()
+turtle.done()
