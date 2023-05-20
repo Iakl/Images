@@ -1,5 +1,4 @@
 from PIL import Image, ImageDraw, ImageFont
-import series 
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
@@ -24,8 +23,7 @@ class ImageNFT:
   def add_text(self, text, xp, yp, color='black', fsize=16):
     draw = ImageDraw.Draw(self.image)
     font_path = "iakl.ttf"
-    font_size = fsize
-    font = ImageFont.truetype(font_path, font_size)
+    font = ImageFont.truetype(font_path, fsize)
     draw.text((xp, yp), text, fill=color, font=font)
   
   def draw_grid(self, lcolor="white"):
@@ -49,7 +47,7 @@ class ImageNFT:
     draw.rectangle((self.margin + x*self.cell_w, self.margin + y*self.cell_h, self.margin + (x+1)*self.cell_w, self.margin + (y+1)*self.cell_h), fill=ccolor)
 
   def savejpg(self, name):
-    self.image.save(f"{name}.jpg", "JPEG")
+    self.image.save(f"fibonacci series/{name}.jpg", "JPEG")
 
   def set_grid(self, num_rows, num_cols):
     width, height = self.image.size

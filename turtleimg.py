@@ -11,7 +11,7 @@ class ImageNFT:
         self.cell_h = 0
         self.window = turtle.Screen()
         self.window.bgcolor(bgcolor)
-        self.window.setup(width=w, height=h)
+        self.window.setup(width=(w + 20), height=(h + 20))
 
         self.pen = turtle.Turtle()
         self.pen.speed(2)
