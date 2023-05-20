@@ -14,7 +14,7 @@ class ImageNFT:
         self.window.setup(width=w, height=h)
 
         self.pen = turtle.Turtle()
-        self.pen.speed(0)
+        self.pen.speed(2)
         self.pen.penup()
         self.pen.color(bdcolor)
         self.pen.pensize(3)
@@ -107,22 +107,22 @@ class ImageNFT:
         self.cell_w = (width -2*self.margin) / num_rows
         self.cell_h = (height -2*self.margin) / num_cols
 
-h = 4096
-w = 4096
-cells = 100
-margin = 50
+# h = 4096
+# w = 4096
+# cells = 100
+# margin = 50
 
-# wn = turtle.Screen()
-pen = turtle.Turtle()
-pen.speed(1)
-pen.penup()
-pen.color("black")
-pen.pensize(3)
-pen.goto(-w // 2 + margin, h // 2 - margin)
-pen.pendown()
-pen.goto(w // 2 - margin, h // 2 - margin)
-pen.goto(w // 2 - margin, -h // 2 + margin)
-pen.goto(-w // 2 + margin, -h // 2 + margin)
-pen.goto(-w // 2 + margin, h // 2 - margin)
-pen.penup()
-turtle.done()
+#wn = turtle.Screen()
+# pen = turtle.Turtle()
+# pen.speed(1)
+# pen.penup()
+# pen.color("black")
+# pen.pensize(3)
+# pen.goto(-w // 2 + margin, h // 2 - margin)
+# pen.pendown()
+# pen.goto(w // 2 - margin, h // 2 - margin)
+# pen.goto(w // 2 - margin, -h // 2 + margin)
+# pen.goto(-w // 2 + margin, -h // 2 + margin)
+# pen.goto(-w // 2 + margin, h // 2 - margin)
+# pen.penup()
+# turtle.done()

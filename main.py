@@ -1,10 +1,10 @@
 from turtleimg import ImageNFT
 import series
 
-sizeh = 4096
-sizew = 4096
-cells = 100
-margin = 50
+sizeh = 512
+sizew = 512
+cells = 10
+margin = 5
 #margin = sizew / (cells + 2)
 
 rs = "#fdcae1"
@@ -14,7 +14,7 @@ tc = "#ff5830"
 
 
 image = ImageNFT(sizew, sizeh, margin, 'black', 'white')
-# image.set_grid(cells, cells)
+#image.set_grid(cells, cells)
 
 # prime_numbers = series.get_primes_lower_than_x(cells * cells)
 # image.paint_serie(prime_numbers, 'white')
@@ -25,7 +25,7 @@ image = ImageNFT(sizew, sizeh, margin, 'black', 'white')
 # image.add_text("[ak]", sizew - margin *2.3, sizeh - margin, tc, int(margin * 2/3))
 
 # image.add_image("right.png", (sizew - margin*2, 0))
-# image.draw_grid('white')
+#image.draw_grid('white')
 
 # image.savejpg('primes')
 
